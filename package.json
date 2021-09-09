@@ -1,0 +1,19 @@
+{
+  "name": "packes",
+  "version": "0.1.1",
+  "description": "Pack es files into one without any compiling.",
+  "main": "index.js",
+  "bin": {
+    "packes": "index.js"
+  },
+  "keywords": [
+    "ES",
+    "packer"
+  ],
+  "author": "tangshuang",
+  "license": "ISC",
+  "dependencies": {
+    "process.args": "^0.1.0",
+    "webpack": "^5.50.0"
+  }
+}
