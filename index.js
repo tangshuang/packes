@@ -195,6 +195,10 @@ compiler.run((err, stats) => {
     throw err
   }
 
+  const handleErr = (err) => {
+    console.error(err)
+  }
+
   const info = stats.toJson()
   let errFlag = false
 
@@ -209,11 +213,12 @@ compiler.run((err, stats) => {
 
   if (errFlag) {
     removeFiles()
-    compiler.close()
+    compiler.close(handleErr)
     return
   }
 
-  compiler.close(() => {})
+  removeFiles()
+  compiler.close(handleErr)
 
   const outputContent = fs.readFileSync(outputFile).toString()
   const distContent = `${outputContent};\nconst {${importVars.join(',')}} = __PACKES__;\n${replacedContent}`
