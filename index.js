@@ -196,7 +196,9 @@ compiler.run((err, stats) => {
   }
 
   const handleErr = (err) => {
-    console.error(err)
+    if (err) {
+      console.error(err)
+    }
   }
 
   const info = stats.toJson()
@@ -217,12 +219,12 @@ compiler.run((err, stats) => {
     return
   }
 
-  removeFiles()
-  compiler.close(handleErr)
-
   const outputContent = fs.readFileSync(outputFile).toString()
   const distContent = `${outputContent};\nconst {${importVars.join(',')}} = __PACKES__;\n${replacedContent}`
   fs.writeFileSync(path.resolve(dist), distContent)
+
+  removeFiles()
+  compiler.close(handleErr)
 
   console.log('============ pack success ============')
 })
